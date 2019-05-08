@@ -2,7 +2,7 @@ module.exports = function(RED) {
     "use strict";
     const {NlpManager} = require("node-nlp");
 
-    function NlpNode(n) {
+    function NlpManagerNode(n) {
         RED.nodes.createNode(this,n);
         var node = this;
 
@@ -14,7 +14,7 @@ module.exports = function(RED) {
             }
         });
     }
-    RED.nodes.registerType("nlp",NlpNode);
+    RED.nodes.registerType("nlpmanager",NlpManagerNode);
 
     const setDocuments = async (node, msg) => {
         const manager = new NlpManager({ "languages": msg.locales });
@@ -43,14 +43,4 @@ module.exports = function(RED) {
             msg.payload.locale, msg.payload.utterance);
         node.send(msg);
     };
-
-    // function setAnswers(msg){
-    // }
-
-    // function runProcess(node, msg){
-    //     console.log("run process");
-    //     msg.payload = await manager.process(
-    //         msg.payload.locale, msg.payload.utterance);
-    //     node.send(msg);
-    // }
 };
