@@ -13,7 +13,7 @@
   "author": "hiroyuki okada",
   "license": "MIT",
   "dependencies": {
-    "node-nlp": "^3.1.0"
+    "node-nlp": "^3.2.0"
   },
   "node-red": {
     "nodes": {
