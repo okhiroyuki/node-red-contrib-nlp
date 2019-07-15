@@ -18,6 +18,7 @@ module.exports = function(RED) {
             const _threshold = msg.threshold || 0.8;
             manager = new NerManager({ threshold: _threshold });
             const result = await manager.findEntities(msg.payload);
+            msg.payload = result;
             node.send(msg);
         }catch(err){
             node.error(err.message);
