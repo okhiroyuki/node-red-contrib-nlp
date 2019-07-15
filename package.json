@@ -18,7 +18,8 @@
   "node-red": {
     "nodes": {
       "nlpmaneger": "./nodes/nlpmanager.js",
-      "brainnlu": "./nodes/brainnlu.js"
+      "brainnlu": "./nodes/brainnlu.js",
+      "entityextraction": "./nodes/entityextraction.js"
     }
   }
 }

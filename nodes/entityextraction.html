@@ -1,0 +1,33 @@
+
+<script type="text/x-red" data-template-name="entityextraction">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="entityextraction">
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('entityextraction',{
+        color:"#a3a3f7",
+        category: 'NLP',
+        defaults: {
+            name: {value:""},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "function.png",
+        paletteLabel: function() {
+            return this._("entityextraction.entityextraction");
+        },
+        label: function() {
+            return this.name||this._("entityextraction.entityextraction");
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        }
+    });
+</script>
