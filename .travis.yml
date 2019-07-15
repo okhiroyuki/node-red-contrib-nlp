@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+matrix:
+  include:
+    - node_js: 12
+    - node_js: 10
+    - node_js: 8
+before_install:
+  - npm i -g npm
+before_script:
+  # Remove the './node_modules/.bin:' entry, see https://github.com/travis-ci/travis-ci/issues/8813
+  - export PATH=`echo ${PATH} | sed -re 's,(^|:)(./)?node_modules/.bin($|:),\1,'`
+  - npm install -g istanbul grunt-cli coveralls
+  - npm install node-red
+script:
+  - istanbul cover grunt --report lcovonly && istanbul report text && ( cat coverage/lcov.info | $(npm get prefix)/bin/coveralls || true ) && rm -rf coverage
