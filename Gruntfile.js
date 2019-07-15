@@ -34,14 +34,6 @@ module.exports = function(grunt){
                 timeout: 3000
             },
             all: { src: ['test/*_spec.js'] }
-        },
-        mocha_istanbul: {
-            options: {
-                timeout: 3000,
-                ui: 'bdd',
-                reporter: 'spec'
-            },
-            all: { src: ['test/*_spec.js'] }
         }
     });
 
@@ -49,7 +41,6 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-lint-inline');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks("grunt-simple-mocha");
-    grunt.loadNpmTasks('grunt-mocha-istanbul');
 
     grunt.registerTask('default', ['jshint:all', 'jsonlint:all', 'inlinelint:html', "simplemocha:all"]);
 };
