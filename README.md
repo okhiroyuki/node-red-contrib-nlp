@@ -6,6 +6,8 @@ Node-RED for [NLP.js](https://github.com/axa-group/nlp.js)
 
 # Nodes
 - [NLP Maneger](https://github.com/axa-group/nlp.js/blob/master/docs/nlp-manager.md)
+- [Brain NLU](https://github.com/axa-group/nlp.js/blob/master/docs/brain-nlu.md)
+- [Entity Extraction](https://github.com/axa-group/nlp.js/blob/master/docs/builtin-entity-extraction.md)
 
 # Example of use
 
