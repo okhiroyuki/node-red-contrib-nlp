@@ -11,11 +11,11 @@ module.exports = function(RED) {
             run(node, msg);
         });
     }
-    RED.nodes.registerType("brainnlu",BrainNLUNode);
+    RED.nodes.registerType("brain_nlu",BrainNLUNode);
 
     const run = async (node, msg) => {
         try{
-            classifier = new BrainNLU({ "languages": msg.locales });
+            classifier = new BrainNLU({ "languages": msg.locale });
             setDocuments(msg);
             console.log("Training, please wait..");
             await classifier.train();

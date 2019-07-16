@@ -1,17 +1,12 @@
-
-<script type="text/x-red" data-template-name="entityextraction">
+<script type="text/x-red" data-template-name="brain_nlu">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="entityextraction">
-
-</script>
-
 <script type="text/javascript">
-    RED.nodes.registerType('entityextraction',{
+    RED.nodes.registerType('brain_nlu',{
         color:"#a3a3f7",
         category: 'NLP',
         defaults: {
@@ -21,10 +16,10 @@
         outputs:1,
         icon: "function.png",
         paletteLabel: function() {
-            return this._("entityextraction.entityextraction");
+            return this._("brain_nlu.brain_nlu");
         },
         label: function() {
-            return this.name||this._("entityextraction.entityextraction");
+            return this.name||this._("brain_nlu.brain_nlu");
         },
         labelStyle: function() {
             return (this.name)?"node_label_italic":"";

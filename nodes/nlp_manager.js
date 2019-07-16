@@ -11,7 +11,7 @@ module.exports = function(RED) {
             run(node, msg);
         });
     }
-    RED.nodes.registerType("nlpmanager",NlpManagerNode);
+    RED.nodes.registerType("nlp_manager",NlpManagerNode);
 
     const run = async (node, msg) => {
         try{
