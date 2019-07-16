@@ -21,9 +21,9 @@
   },
   "node-red": {
     "nodes": {
-      "nlpmaneger": "./nodes/nlpmanager.js",
-      "brainnlu": "./nodes/brainnlu.js",
-      "entityextraction": "./nodes/entityextraction.js"
+      "nlp_maneger": "./nodes/nlp_manager.js",
+      "brain_nlu": "./nodes/brain_nlu.js",
+      "buildin_entity_extraction": "./nodes/buildin_entity_extraction.js"
     }
   },
   "devDependencies": {

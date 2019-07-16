@@ -3,7 +3,7 @@ module.exports = function(RED) {
     const { NerManager } = require('node-nlp');
     let manager;
 
-    function EntityExtractionNode(n) {
+    function BuildinEntityExtractionNode(n) {
         RED.nodes.createNode(this,n);
         var node = this;
 
@@ -11,12 +11,11 @@ module.exports = function(RED) {
             run(node, msg);
         });
     }
-    RED.nodes.registerType("entityextraction", EntityExtractionNode);
+    RED.nodes.registerType("buildin_entity_extraction", BuildinEntityExtractionNode);
 
     const run = async (node, msg) => {
         try{
-            const _threshold = msg.threshold || 0.8;
-            manager = new NerManager({ threshold: _threshold });
+            manager = new NerManager({ threshold: 0.8 });
             const result = await manager.findEntities(msg.payload);
             msg.payload = result;
             node.send(msg);
