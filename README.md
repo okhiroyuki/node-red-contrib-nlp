@@ -11,4 +11,4 @@ Node-RED for [NLP.js](https://github.com/axa-group/nlp.js)
 
 # Example of use
 
-See: [https://github.com/okhiroyuki/node-red-contrib-nlp/tree/master/samples]
+Check [Samples](https://github.com/okhiroyuki/node-red-contrib-nlp/tree/master/samples)
