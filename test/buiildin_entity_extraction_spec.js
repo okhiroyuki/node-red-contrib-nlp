@@ -2,7 +2,7 @@ var should = require("should");
 var helper = require("node-red-node-test-helper");
 helper.init(require.resolve("node-red"));
 
-var entityextractionNode = require("../nodes/entityextraction");
+var node = require("../nodes/buildin_entity_extraction");
 
 describe('Entity Extraction Node', function () {
 
@@ -19,20 +19,20 @@ describe('Entity Extraction Node', function () {
   });
 
   it('should be loaded', function (done) {
-    var flow = [{ id: "n1", type: "entityextraction", name: "entityextraction" }];
-    helper.load(entityextractionNode, flow, function () {
+    var flow = [{ id: "n1", type: "buildin_entity_extraction", name: "test" }];
+    helper.load(node, flow, function () {
       var n1 = helper.getNode("n1");
-      n1.should.have.property('name', 'entityextraction');
+      n1.should.have.property('name', 'test');
       done();
     });
   });
 
   it('should make payload', function (done) {
     var flow = [
-      { id: "n1", type: "entityextraction", name: "entityextraction", wires:[["n2"]] },
+      { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
-    helper.load(entityextractionNode, flow, function () {
+    helper.load(node, flow, function () {
       var n2 = helper.getNode("n2");
       var n1 = helper.getNode("n1");
       n2.on("input", function (msg) {
@@ -47,10 +47,10 @@ describe('Entity Extraction Node', function () {
 
   it('should make empty payload', function (done) {
     var flow = [
-      { id: "n1", type: "entityextraction", name: "entityextraction", wires:[["n2"]] },
+      { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
-    helper.load(entityextractionNode, flow, function () {
+    helper.load(node, flow, function () {
       var n2 = helper.getNode("n2");
       var n1 = helper.getNode("n1");
       n2.on("input", function (msg) {
