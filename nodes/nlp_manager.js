@@ -3,52 +3,6 @@ module.exports = function(RED) {
     const {NlpManager} = require("node-nlp");
     let manager;
 
-    function NlpManagerNode(n) {
-        RED.nodes.createNode(this,n);
-        var node = this;
-
-        node.on("input", function(msg) {
-            run(node, msg);
-        });
-    }
-    RED.nodes.registerType("nlp_manager",NlpManagerNode);
-
-    const run = async (node, msg) => {
-        try{
-            manager = new NlpManager({ "languages": msg.locales });
-            setAssetDomeins(msg);
-            setDocuments(msg);
-            console.log("Training, please wait..");
-            await manager.train();
-            console.log("Trained!");
-            setAnswers(msg);
-            console.log("run process");
-            msg.payload = await manager.process(
-                msg.payload.locale, msg.payload.utterance);
-            node.send(msg);
-        }catch(err){
-            node.error(err.message);
-        }
-    };
-
-    const setAssetDomeins = (msg) => {
-        console.log("setAssetDomeins");
-        try{
-            let assetDomeins = msg.assetDomains;
-            if(assetDomeins !== undefined){
-                for(let i=0;i<assetDomeins.length; i++){
-                    manager.assignDomain(
-                        documents[i].locale,
-                        documents[i].intent,
-                        documents[i].domain
-                    );
-                }
-            }
-        }catch(err){
-            throw new Error(err);
-        }
-    };
-
     const setDocuments = (msg) => {
         console.log("setDocumetns");
         try{
@@ -85,6 +39,53 @@ module.exports = function(RED) {
                 }
             }
     }catch(err){
+            throw new Error(err);
+        }
+    };
+
+    const run = async (node, msg) => {
+        try{
+            manager = new NlpManager({ "languages": msg.locales });
+            setAssetDomeins(msg);
+            setDocuments(msg);
+            console.log("Training, please wait..");
+            await manager.train();
+            console.log("Trained!");
+            setAnswers(msg);
+            console.log("run process");
+            msg.payload = await manager.process(
+                msg.payload.locale, msg.payload.utterance);
+            node.send(msg);
+        }catch(err){
+            node.error(err.message);
+        }
+    };
+
+    function NlpManagerNode(n) {
+        RED.nodes.createNode(this,n);
+        var node = this;
+
+        node.on("input", function(msg) {
+            run(node, msg);
+        });
+    }
+    RED.nodes.registerType("nlp_manager",NlpManagerNode);
+
+
+    const setAssetDomeins = (msg) => {
+        console.log("setAssetDomeins");
+        try{
+            let assetDomeins = msg.assetDomains;
+            if(assetDomeins !== undefined){
+                for(let i=0;i<assetDomeins.length; i++){
+                    manager.assignDomain(
+                        documents[i].locale,
+                        documents[i].intent,
+                        documents[i].domain
+                    );
+                }
+            }
+        }catch(err){
             throw new Error(err);
         }
     };
