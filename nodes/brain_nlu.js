@@ -35,7 +35,7 @@ module.exports = function(RED) {
 
     function BrainNLUNode(n) {
         RED.nodes.createNode(this,n);
-        var node = this;
+        let node = this;
 
         node.on("input", function(msg) {
             run(node, msg);

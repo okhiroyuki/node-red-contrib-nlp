@@ -1,8 +1,8 @@
-var should = require("should");
-var helper = require("node-red-node-test-helper");
+const should = require("should");
+const helper = require("node-red-node-test-helper");
 helper.init(require.resolve("node-red"));
 
-var node = require("../nodes/language_guesser");
+const node = require("../nodes/language_guesser");
 
 describe("Entity Extraction Node", () => {
 
@@ -19,22 +19,22 @@ describe("Entity Extraction Node", () => {
   });
 
   it("should be loaded", (done) => {
-    var flow = [{ id: "n1", type: "language_guesser", name: "test" }];
+    const flow = [{ id: "n1", type: "language_guesser", name: "test" }];
     helper.load(node, flow, () => {
-      var n1 = helper.getNode("n1");
+      const n1 = helper.getNode("n1");
       n1.should.have.property("name", "test");
       done();
     });
   });
 
   it("should make payload", (done) => {
-    var flow = [
+    const flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
     helper.load(node, flow, () => {
-      var n2 = helper.getNode("n2");
-      var n1 = helper.getNode("n1");
+      const n2 = helper.getNode("n2");
+      const n1 = helper.getNode("n1");
       n2.on("input", function (msg) {
         msg.payload.should.have.property("language", "English");
         done();
@@ -44,13 +44,13 @@ describe("Entity Extraction Node", () => {
   });
 
   it("should make empty payload", (done) => {
-    var flow = [
+    const flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
     helper.load(node, flow, () => {
-      var n2 = helper.getNode("n2");
-      var n1 = helper.getNode("n1");
+      const n2 = helper.getNode("n2");
+      const n1 = helper.getNode("n1");
       n2.on("input", function (msg) {
         should.equal(msg.payload, undefined);
         done();
@@ -60,13 +60,13 @@ describe("Entity Extraction Node", () => {
   });
 
   it("should make object payload", (done) => {
-    var flow = [
+    const flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
     helper.load(node, flow, () => {
-      var n2 = helper.getNode("n2");
-      var n1 = helper.getNode("n1");
+      const n2 = helper.getNode("n2");
+      const n1 = helper.getNode("n1");
       n1.receive({ payload: {"test":"test"} });
       n1.on("call:error",(msg) => {
         done();

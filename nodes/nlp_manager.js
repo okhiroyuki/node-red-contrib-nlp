@@ -48,11 +48,8 @@ module.exports = function(RED) {
             manager = new NlpManager({ "languages": msg.locales });
             setAssetDomeins(msg);
             setDocuments(msg);
-            console.log("Training, please wait..");
             await manager.train();
-            console.log("Trained!");
             setAnswers(msg);
-            console.log("run process");
             msg.payload = await manager.process(
                 msg.payload.locale, msg.payload.utterance);
             node.send(msg);
@@ -63,7 +60,7 @@ module.exports = function(RED) {
 
     function NlpManagerNode(n) {
         RED.nodes.createNode(this,n);
-        var node = this;
+        let node = this;
 
         node.on("input", function(msg) {
             run(node, msg);
