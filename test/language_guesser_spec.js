@@ -4,7 +4,7 @@ helper.init(require.resolve("node-red"));
 
 var node = require("../nodes/language_guesser");
 
-describe('Entity Extraction Node', () => {
+describe("Entity Extraction Node", () => {
 
   before((done) => {
     helper.startServer(done);
@@ -18,16 +18,16 @@ describe('Entity Extraction Node', () => {
     helper.unload();
   });
 
-  it('should be loaded', (done) => {
+  it("should be loaded", (done) => {
     var flow = [{ id: "n1", type: "language_guesser", name: "test" }];
     helper.load(node, flow, () => {
       var n1 = helper.getNode("n1");
-      n1.should.have.property('name', 'test');
+      n1.should.have.property("name", "test");
       done();
     });
   });
 
-  it('should make payload', (done) => {
+  it("should make payload", (done) => {
     var flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
@@ -43,7 +43,7 @@ describe('Entity Extraction Node', () => {
     });
   });
 
-  it('should make empty payload', (done) => {
+  it("should make empty payload", (done) => {
     var flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
@@ -59,7 +59,7 @@ describe('Entity Extraction Node', () => {
     });
   });
 
-  it('should make object payload', (done) => {
+  it("should make object payload", (done) => {
     var flow = [
       { id: "n1", type: "language_guesser", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }

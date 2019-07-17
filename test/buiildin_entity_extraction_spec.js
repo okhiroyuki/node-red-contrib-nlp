@@ -4,7 +4,7 @@ helper.init(require.resolve("node-red"));
 
 var node = require("../nodes/buildin_entity_extraction");
 
-describe('Entity Extraction Node', function () {
+describe("Entity Extraction Node", function () {
 
   before(function(done) {
     helper.startServer(done);
@@ -18,16 +18,16 @@ describe('Entity Extraction Node', function () {
     helper.unload();
   });
 
-  it('should be loaded', function (done) {
+  it("should be loaded", function (done) {
     var flow = [{ id: "n1", type: "buildin_entity_extraction", name: "test" }];
     helper.load(node, flow, function () {
       var n1 = helper.getNode("n1");
-      n1.should.have.property('name', 'test');
+      n1.should.have.property("name", "test");
       done();
     });
   });
 
-  it('should make payload', function (done) {
+  it("should make payload", function (done) {
     var flow = [
       { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
@@ -45,7 +45,7 @@ describe('Entity Extraction Node', function () {
     });
   });
 
-  it('should make empty payload', function (done) {
+  it("should make empty payload", function (done) {
     var flow = [
       { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
