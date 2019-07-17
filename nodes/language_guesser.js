@@ -8,12 +8,16 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg) {
-            try{
-                const guess = language.guess(msg.payload);
-                msg.payload = guess[0];
-                node.send(msg);
-            }catch(e){
-                node.error(e);
+            if(typeof msg.payload === "string" && msg.payload.length > 0){
+                try{
+                    const guess = language.guess(msg.payload);
+                    msg.payload = guess[0];
+                    node.send(msg);
+                }catch(e){
+                    node.error(e);
+                }
+            }else{
+                node.error("error msg.payload");
             }
         });
     }

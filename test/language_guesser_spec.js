@@ -51,11 +51,10 @@ describe("Entity Extraction Node", () => {
     helper.load(node, flow, () => {
       const n2 = helper.getNode("n2");
       const n1 = helper.getNode("n1");
-      n2.on("input", function (msg) {
-        should.equal(msg.payload, undefined);
+      n1.receive({ payload: "" });
+      n1.on("call:error", function (msg) {
         done();
       });
-      n1.receive({ payload: "" });
     });
   });
 
