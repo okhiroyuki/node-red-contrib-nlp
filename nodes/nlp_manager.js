@@ -3,8 +3,24 @@ module.exports = function(RED) {
     const {NlpManager} = require("node-nlp");
     let manager;
 
+    const setAssetDomeins = (msg) => {
+        try{
+            let assetDomeins = msg.assetDomains;
+            if(assetDomeins !== undefined){
+                for(let i=0;i<assetDomeins.length; i++){
+                    manager.assignDomain(
+                        documents[i].locale,
+                        documents[i].intent,
+                        documents[i].domain
+                    );
+                }
+            }
+        }catch(err){
+            throw new Error(err);
+        }
+    };
+
     const setDocuments = (msg) => {
-        console.log("setDocumetns");
         try{
             let documents = msg.documents;
             if(documents === undefined){
@@ -24,7 +40,6 @@ module.exports = function(RED) {
     };
 
     const setAnswers = (msg) => {
-        console.log("add Answers");
         try{
             let answers = msg.answers;
             if(answers === undefined){
@@ -67,23 +82,4 @@ module.exports = function(RED) {
         });
     }
     RED.nodes.registerType("nlp_manager",NlpManagerNode);
-
-
-    const setAssetDomeins = (msg) => {
-        console.log("setAssetDomeins");
-        try{
-            let assetDomeins = msg.assetDomains;
-            if(assetDomeins !== undefined){
-                for(let i=0;i<assetDomeins.length; i++){
-                    manager.assignDomain(
-                        documents[i].locale,
-                        documents[i].intent,
-                        documents[i].domain
-                    );
-                }
-            }
-        }catch(err){
-            throw new Error(err);
-        }
-    };
 };
