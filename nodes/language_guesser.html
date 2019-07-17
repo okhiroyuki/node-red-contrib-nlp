@@ -1,5 +1,5 @@
 
-<script type="text/x-red" data-template-name="buildin_entity_extraction">
+<script type="text/x-red" data-template-name="language_guesser">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -7,7 +7,7 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType("buildin_entity_extraction",{
+    RED.nodes.registerType("language_guesser",{
         color:"#a3a3f7",
         category: "NLP",
         defaults: {
@@ -17,10 +17,10 @@
         outputs:1,
         icon: "function.png",
         paletteLabel: function() {
-            return this._("buildin_entity_extraction.buildin_entity_extraction");
+            return this._("language_guesser.language_guesser");
         },
         label: function() {
-            return this.name||this._("buildin_entity_extraction.buildin_entity_extraction");
+            return this.name||this._("language_guesser.language_guesser");
         },
         labelStyle: function() {
             return (this.name)?"node_label_italic":"";

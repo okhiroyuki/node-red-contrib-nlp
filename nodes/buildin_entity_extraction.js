@@ -1,17 +1,7 @@
 module.exports = function(RED) {
     "use strict";
-    const { NerManager } = require('node-nlp');
+    const { NerManager } = require("node-nlp");
     let manager;
-
-    function BuildinEntityExtractionNode(n) {
-        RED.nodes.createNode(this,n);
-        var node = this;
-
-        node.on("input", function(msg) {
-            run(node, msg);
-        });
-    }
-    RED.nodes.registerType("buildin_entity_extraction", BuildinEntityExtractionNode);
 
     const run = async (node, msg) => {
         try{
@@ -23,4 +13,15 @@ module.exports = function(RED) {
             node.error(err.message);
         }
     };
+
+    function BuildinEntityExtractionNode(n) {
+        RED.nodes.createNode(this,n);
+        let node = this;
+
+        node.on("input", function(msg) {
+            run(node, msg);
+        });
+    }
+    RED.nodes.registerType("buildin_entity_extraction", BuildinEntityExtractionNode);
+
 };

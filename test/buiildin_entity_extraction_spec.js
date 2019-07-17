@@ -1,41 +1,41 @@
-var should = require("should");
-var helper = require("node-red-node-test-helper");
+const should = require("should");
+const helper = require("node-red-node-test-helper");
 helper.init(require.resolve("node-red"));
 
-var node = require("../nodes/buildin_entity_extraction");
+const node = require("../nodes/buildin_entity_extraction");
 
-describe('Entity Extraction Node', function () {
+describe("Entity Extraction Node", () => {
 
   before(function(done) {
     helper.startServer(done);
   });
 
-  after(function(done) {
+  after((done) => {
     helper.stopServer(done);
   });
 
-  afterEach(function() {
+  afterEach(() => {
     helper.unload();
   });
 
-  it('should be loaded', function (done) {
-    var flow = [{ id: "n1", type: "buildin_entity_extraction", name: "test" }];
-    helper.load(node, flow, function () {
-      var n1 = helper.getNode("n1");
-      n1.should.have.property('name', 'test');
+  it("should be loaded", (done) => {
+    const flow = [{ id: "n1", type: "buildin_entity_extraction", name: "test" }];
+    helper.load(node, flow, () => {
+      const n1 = helper.getNode("n1");
+      n1.should.have.property("name", "test");
       done();
     });
   });
 
-  it('should make payload', function (done) {
-    var flow = [
+  it("should make payload", function (done) {
+    const flow = [
       { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
-    helper.load(node, flow, function () {
-      var n2 = helper.getNode("n2");
-      var n1 = helper.getNode("n1");
-      n2.on("input", function (msg) {
+    helper.load(node, flow, () => {
+      const n2 = helper.getNode("n2");
+      const n1 = helper.getNode("n1");
+      n2.on("input", (msg) => {
         msg.payload.should.have.size(1);
         msg.payload[0].should.have.property("sourceText", "8.8.8.8");
         msg.payload[0].should.have.property("entity", "ip");
@@ -45,15 +45,15 @@ describe('Entity Extraction Node', function () {
     });
   });
 
-  it('should make empty payload', function (done) {
-    var flow = [
+  it("should make empty payload", (done) => {
+    const flow = [
       { id: "n1", type: "buildin_entity_extraction", name: "test", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
-    helper.load(node, flow, function () {
-      var n2 = helper.getNode("n2");
-      var n1 = helper.getNode("n1");
-      n2.on("input", function (msg) {
+    helper.load(node, flow, () => {
+      const n2 = helper.getNode("n2");
+      const n1 = helper.getNode("n1");
+      n2.on("input", (msg) => {
         msg.payload.should.have.size(0);
         done();
       });
