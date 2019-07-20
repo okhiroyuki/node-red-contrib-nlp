@@ -1,0 +1,51 @@
+
+<script type="text/x-red" data-template-name="sentiment_analysis">
+    <div class="form-row">
+        <label for="node-input-language"><i class="fa fa-comments fa-fw"></i> <span data-i18n="sentiment_analysis.label.utterance"></span></label>
+        <input type="text" id="node-input-utterance">
+    </div>
+    <div class="form-row">
+        <label for="node-input-language"><i class="fa fa-list fa-fw"></i> <span data-i18n="sentiment_analysis.label.lang"></span></label>
+        <select type="text">
+            <option value="en" data-i18n="sentiment_analysis.lang.en"></option>
+            <option value="ca" data-i18n="sentiment_analysis.lang.ca"></option>
+            <option value="eu" data-i18n="sentiment_analysis.lang.en"></option>
+            <option value="es" data-i18n="sentiment_analysis.lang.es"></option>
+            <option value="nl" data-i18n="sentiment_analysis.lang.nl"></option>
+            <option value="fr" data-i18n="sentiment_analysis.lang.fr"></option>
+            <option value="it" data-i18n="sentiment_analysis.lang.it"></option>
+            <option value="de" data-i18n="sentiment_analysis.lang.de"></option>
+            <option value="gl" data-i18n="sentiment_analysis.lang.gl"></option>
+            <option value="msg" data-i18n="sentiment_analysis.lang.msg"></option>
+        </select>
+        <input type="hidden" id="node-input-lang">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("sentiment_analysis",{
+        color:"#a3a3f7",
+        category: "NLP",
+        defaults: {
+            name: {value:""},
+            utterance: {value:""},
+            lang: {value:"en"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "function.png",
+        paletteLabel: function() {
+            return this._("sentiment_analysis.sentiment_analysis");
+        },
+        label: function() {
+            return this.name||this._("sentiment_analysis.sentiment_analysis");
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        }
+    });
+</script>

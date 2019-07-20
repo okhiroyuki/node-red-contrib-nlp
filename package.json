@@ -24,7 +24,8 @@
       "nlp_maneger": "./nodes/nlp_manager.js",
       "brain_nlu": "./nodes/brain_nlu.js",
       "buildin_entity_extraction": "./nodes/buildin_entity_extraction.js",
-      "language_guesser": "./nodes/language_guesser.js"
+      "language_guesser": "./nodes/language_guesser.js",
+      "sentiment_analysis": "./nodes/sentiment_analysis.js"
     }
   },
   "devDependencies": {

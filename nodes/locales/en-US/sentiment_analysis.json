@@ -1,0 +1,25 @@
+{
+    "sentiment_analysis": {
+        "sentiment_analysis": "Sentiment Analysis",
+        "label":{
+            "utterance": "Utterance",
+            "lang": "Language"
+        },
+        "lang":{
+            "eu": "Basque",
+            "ca": "Catalan",
+            "en": "English",
+            "es": "Spanish",
+            "nl": "Dutch",
+            "fr": "French",
+            "it": "Italian",
+            "de": "German",
+            "gl": "Galician",
+            "msg": "-- defined by msg.lang --"
+        },
+        "error":{
+            "payload": "Parameter Error : msg.payload",
+            "lang": "Parameter Error : msg.lang"
+        }
+    }
+}
