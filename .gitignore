@@ -85,3 +85,5 @@ typings/
 
 # nlp.js
 *.nlp
+
+coverage/
