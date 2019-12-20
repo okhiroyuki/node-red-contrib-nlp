@@ -87,3 +87,9 @@ typings/
 *.nlp
 
 coverage/
+test/
+
+.gitignore
+.jshintrc
+.github/
+Gruntfile.js
