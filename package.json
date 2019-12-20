@@ -17,7 +17,7 @@
   "author": "hiroyuki okada",
   "license": "MIT",
   "dependencies": {
-    "node-nlp": "3.2.0"
+    "node-nlp": "^3.10.2"
   },
   "node-red": {
     "nodes": {
@@ -35,8 +35,8 @@
     "grunt-mocha-istanbul": "^5.0.2",
     "grunt-simple-mocha": "^0.4.1",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^6.1.4",
-    "node-red": "^0.20.7",
+    "mocha": "^6.2.2",
+    "node-red": "^1.0.3",
     "node-red-node-test-helper": "^0.2.3",
     "should": "^13.2.3"
   },
