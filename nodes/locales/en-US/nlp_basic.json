@@ -1,0 +1,17 @@
+{
+    "nlp_basic": {
+        "nlp_basic": "nlp basic",
+        "label":{
+            "utterance": "utterance",
+            "lang": "lang"    
+        },
+        "langs": {
+            "en": "English",
+            "jp": "Japanese"
+        },
+        "warn":{
+            "noUtterance": "Utterance is Empty.",
+            "noCorpus": "must set msg.corpus."
+        }
+    }
+}
