@@ -17,14 +17,13 @@
   "author": "hiroyuki okada",
   "license": "MIT",
   "dependencies": {
-    "node-nlp": "^3.10.2"
+    "@nlpjs/basic": "^4.9.1",
+    "@nlpjs/qna-importer": "^4.4.0",
+    "tmp": "^0.2.1"
   },
   "node-red": {
     "nodes": {
-      "nlp_maneger": "./nodes/nlp_manager.js",
-      "brain_nlu": "./nodes/brain_nlu.js",
-      "buildin_entity_extraction": "./nodes/buildin_entity_extraction.js",
-      "language_guesser": "./nodes/language_guesser.js"
+      "nlp basic": "./nodes/nlp_basic.js"
     }
   },
   "devDependencies": {
