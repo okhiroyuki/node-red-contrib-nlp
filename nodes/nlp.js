@@ -5,21 +5,31 @@ module.exports = function(RED) {
     const path = require('path');
     const { dockStart } = require('@nlpjs/basic');
 
-    function getJsonFile(msg){
+    function getJsonFile(data){
         let tmpDir = tmp.dirSync({
             unsafeCleanup: true
         });
         let filepath = tmpDir.name + "/" + path.basename(tmpDir.name) + ".json";
-        fs.writeFileSync(filepath, JSON.stringify(msg.corpus));
+        fs.writeFileSync(filepath, JSON.stringify(data));
         return filepath;
     }
+
+    const runTrain = async (node, msg) => {
+        try{
+            const dock = await dockStart({ use: ['Basic']});
+            const nlp = dock.get('nlp');
+            await nlp.addCorpus(getJsonFile(msg.payload));
+            await nlp.train();
+            node.send(msg);
+        }catch(err){
+            node.error(err.message);
+        }
+    };
 
     const run = async (node, msg) => {
         try{
             const dock = await dockStart({ use: ['Basic']});
             const nlp = dock.get('nlp');
-            await nlp.addCorpus(getJsonFile(msg));
-            await nlp.train();
             const response = await nlp.process(node.lang, node.utterance);
             msg.payload = response;
             node.send(msg);
@@ -47,16 +57,26 @@ module.exports = function(RED) {
                 if(hasString(msg.payload)){
                     node.utterance = msg.payload;
                 }else{
-                    node.warn(RED._("nlp_basic.warn.noUtterance"));
+                    node.warn(RED._("nlp.warn.noUtterance"));
                     return;
                 }
             }
-            if(hasObject(msg.corpus)){
-                run(node, msg);
+            run(node, msg);
+        });
+    }
+    RED.nodes.registerType("nlp",NlpBasicNode);
+
+    function NlpTrainNode(n) {
+        RED.nodes.createNode(this,n);
+        let node = this;
+
+        node.on("input", function(msg) {
+            if(hasObject(msg.payload)){
+                runTrain(node, msg);
             }else{
-                node.warn(RED._("nlp_basic.warn.noCorpus"));
+                node.warn(RED._("nlp.warn.noCorpus"));
             }
         });
     }
-    RED.nodes.registerType("nlp basic",NlpBasicNode);
+    RED.nodes.registerType("nlp train",NlpTrainNode);
 };

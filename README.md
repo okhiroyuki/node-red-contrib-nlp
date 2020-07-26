@@ -8,7 +8,7 @@ Node-RED for [NLP.js](https://github.com/axa-group/nlp.js)
 
 Support for Nlp.js v4.
 
-- [nlp basic](https://github.com/axa-group/nlp.js/blob/master/docs/v4/quickstart.md)
+- [nlp](https://github.com/axa-group/nlp.js/blob/master/docs/v4/quickstart.md)
 
 ### up to 0.0.6
 

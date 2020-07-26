@@ -1,0 +1,86 @@
+<script type="text/x-red" data-template-name="nlp">
+    <div class="form-row">
+        <label for="node-input-utterance"><i class="icon-tag"></i> <span data-i18n="nlp.label.utterance"></span></label>
+        <input type="text" id="node-input-utterance">
+    </div>
+    <div class="form-row">
+        <label for="node-input-lang"><i class="fa fa-list fa-fw"></i> <span data-i18n="nlp.label.lang"></span></label>
+        <select type="text" id="select-lang">
+            <option value="en" data-i18n="nlp.langs.en"></option>
+            <option value="jp" data-i18n="nlp.langs.jp"></option>
+        </select>
+        <input type="hidden" id="node-input-lang">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('nlp',{
+        color:"#a3a3f7",
+        category: 'NLP',
+        defaults: {
+            utterance: {
+                value: ""
+            },
+            lang: {
+                value: "en"
+            },
+            name: {value:""},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "function.png",
+        paletteLabel: function() {
+            return this._("nlp.nlp");
+        },
+        label: function() {
+            return this.name||this._("nlp.nlp");
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            $("#select-lang option").filter(function() {
+                var v = $("#node-input-lang").val();
+                return $(this).val() == v;
+            }).attr('selected', true);
+
+            $("#select-lang").change(function() {
+                var v = $("#select-lang option:selected").val();
+                $("#node-input-lang").val(v);
+            });
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="nlp train">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('nlp train',{
+        color:"#a3a3f7",
+        category: 'NLP',
+        defaults: {
+            name: {value:""},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "function.png",
+        paletteLabel: function() {
+            return this._("nlp.nlp_train");
+        },
+        label: function() {
+            return this.name||this._("nlp.nlp_train");
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        }
+    });
+</script>
