@@ -57,14 +57,14 @@ module.exports = function(RED) {
                 if(hasString(msg.payload)){
                     node.utterance = msg.payload;
                 }else{
-                    node.warn(RED._("nlp_basic.warn.noUtterance"));
+                    node.warn(RED._("nlp.warn.noUtterance"));
                     return;
                 }
             }
             run(node, msg);
         });
     }
-    RED.nodes.registerType("nlp basic",NlpBasicNode);
+    RED.nodes.registerType("nlp",NlpBasicNode);
 
     function NlpTrainNode(n) {
         RED.nodes.createNode(this,n);
@@ -74,7 +74,7 @@ module.exports = function(RED) {
             if(hasObject(msg.payload)){
                 runTrain(node, msg);
             }else{
-                node.warn(RED._("nlp_basic.warn.noCorpus"));
+                node.warn(RED._("nlp.warn.noCorpus"));
             }
         });
     }

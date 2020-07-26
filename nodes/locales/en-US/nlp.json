@@ -1,6 +1,6 @@
 {
-    "nlp_basic": {
-        "nlp_basic": "nlp",
+    "nlp": {
+        "nlp": "nlp",
         "nlp_train": "train",
         "label":{
             "utterance": "utterance",

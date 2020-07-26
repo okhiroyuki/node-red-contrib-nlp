@@ -23,7 +23,7 @@
   },
   "node-red": {
     "nodes": {
-      "nlp basic": "./nodes/nlp_basic.js"
+      "nlp": "./nodes/nlp.js"
     }
   },
   "devDependencies": {
