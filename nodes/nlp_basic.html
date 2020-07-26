@@ -1,7 +1,7 @@
 <script type="text/x-red" data-template-name="nlp basic">
     <div class="form-row">
         <label for="node-input-utterance"><i class="icon-tag"></i> <span data-i18n="nlp_basic.label.utterance"></span></label>
-        <input type="text" id="node-input-utterance" placeholder="Name">
+        <input type="text" id="node-input-utterance">
     </div>
     <div class="form-row">
         <label for="node-input-lang"><i class="fa fa-list fa-fw"></i> <span data-i18n="nlp_basic.label.lang"></span></label>
@@ -26,7 +26,7 @@
                 value: ""
             },
             lang: {
-                value: "en",
+                value: "en"
             },
             name: {value:""},
         },
@@ -52,6 +52,37 @@
                 var v = $("#select-lang option:selected").val();
                 $("#node-input-lang").val(v);
             });
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="nlp train">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('nlp train',{
+        color:"#a3a3f7",
+        category: 'NLP',
+        defaults: {
+            name: {value:""},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "function.png",
+        paletteLabel: function() {
+            return this._("nlp_basic.nlp_train");
+        },
+        label: function() {
+            return this.name||this._("nlp_basic.nlp_train");
+        },
+        labelStyle: function() {
+            return (this.name)?"node_label_italic":"";
+        },
+        oneditprepare: function() {
         }
     });
 </script>
