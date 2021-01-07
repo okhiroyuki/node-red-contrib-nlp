@@ -17,8 +17,8 @@
   "author": "hiroyuki okada",
   "license": "MIT",
   "dependencies": {
-    "@nlpjs/basic": "^4.9.1",
-    "@nlpjs/qna-importer": "^4.4.0",
+    "@nlpjs/basic": "^4.18.1",
+    "@nlpjs/qna-importer": "^4.17.0",
     "tmp": "^0.2.1"
   },
   "node-red": {
@@ -27,16 +27,16 @@
     }
   },
   "devDependencies": {
-    "grunt": "^1.2.1",
-    "grunt-contrib-jshint": "^2.1.0",
+    "grunt": "^1.3.0",
+    "grunt-contrib-jshint": "^3.0.0",
     "grunt-jsonlint": "^2.1.3",
     "grunt-lint-inline": "^1.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
     "grunt-nr-locales-htmllint": "^1.1.0",
     "grunt-simple-mocha": "^0.4.1",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^8.0.1",
-    "node-red": "^1.1.2",
+    "mocha": "^8.2.1",
+    "node-red": "^1.2.7",
     "node-red-node-test-helper": "^0.2.5",
     "should": "^13.2.3"
   },
