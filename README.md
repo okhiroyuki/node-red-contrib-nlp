@@ -14,11 +14,19 @@ Support for Nlp.js v4.
 
 Support for Nlp.js v3.
 
--   [NLP Maneger](https://github.com/axa-group/nlp.js/blob/master/docs/nlp-manager.md)
--   [Brain NLU](https://github.com/axa-group/nlp.js/blob/master/docs/brain-nlu.md)
--   [Buildin Entity Extraction](https://github.com/axa-group/nlp.js/blob/master/docs/builtin-entity-extraction.md)
--   [Language Guesser](https://github.com/axa-group/nlp.js/blob/master/docs/language-guesser.md)
+- [NLP Maneger](https://github.com/axa-group/nlp.js/blob/master/docs/nlp-manager.md)
+- [Brain NLU](https://github.com/axa-group/nlp.js/blob/master/docs/brain-nlu.md)
+- [Buildin Entity Extraction](https://github.com/axa-group/nlp.js/blob/master/docs/builtin-entity-extraction.md)
+- [Language Guesser](https://github.com/axa-group/nlp.js/blob/master/docs/language-guesser.md)
 
-## Example of use
+## Install
+
+Run the following command in your Node-RED user directory - typically ~/.node-red
+
+```bash
+npm install node-red-contrib-nlp
+```
+
+## Usages
 
 Check [Examples](https://github.com/okhiroyuki/node-red-contrib-nlp/tree/master/examples)
