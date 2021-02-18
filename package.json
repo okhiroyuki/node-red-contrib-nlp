@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-nlp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Node-RED node for NLP.js",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   "author": "hiroyuki okada",
   "license": "MIT",
   "dependencies": {
-    "@nlpjs/basic": "^4.18.1",
-    "@nlpjs/qna-importer": "^4.17.0",
+    "@nlpjs/basic": "^4.21.3",
+    "@nlpjs/qna-importer": "^4.21.1",
     "tmp": "^0.2.1"
   },
   "node-red": {
@@ -35,9 +35,9 @@
     "grunt-nr-locales-htmllint": "^1.1.0",
     "grunt-simple-mocha": "^0.4.1",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^8.2.1",
-    "node-red": "^1.2.7",
-    "node-red-node-test-helper": "^0.2.5",
+    "mocha": "^8.3.0",
+    "node-red": "^1.2.9",
+    "node-red-node-test-helper": "^0.2.7",
     "should": "^13.2.3"
   },
   "engines": {
