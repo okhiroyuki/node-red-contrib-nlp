@@ -26,11 +26,23 @@ module.exports = function(RED) {
         }
     };
 
+    function getUtterance(node, msg){
+        if(!hasString(node.utterance) && hasString(msg.payload)){
+            return msg.payload;
+        }else{
+            return node.utterance;
+        }
+    }
+
+    function isEmptyUtterance(node, msg){
+        return !hasString(node.utterance) && !hasString(msg.payload);
+    }
+
     const run = async (node, msg) => {
         try{
             const dock = await dockStart({ use: ['Basic']});
             const nlp = dock.get('nlp');
-            const response = await nlp.process(node.lang, node.utterance);
+            const response = await nlp.process(node.lang, getUtterance(node,msg));
             msg.payload = response;
             node.send(msg);
         }catch(err){
@@ -53,15 +65,11 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg) {
-            if(!hasString(node.utterance)){
-                if(hasString(msg.payload)){
-                    node.utterance = msg.payload;
-                }else{
-                    node.warn(RED._("nlp.warn.noUtterance"));
-                    return;
-                }
+            if(isEmptyUtterance(node, msg)){
+                node.warn(RED._("nlp.warn.noUtterance"));
+            }else{
+                run(node,msg);
             }
-            run(node, msg);
         });
     }
     RED.nodes.registerType("nlp",NlpBasicNode);
