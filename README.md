@@ -18,4 +18,9 @@ npm install node-red-contrib-nlp
 
 ## Usages
 
-Check [Examples](https://github.com/okhiroyuki/node-red-contrib-nlp/tree/master/examples)
+1. Add [node-red-contrib-browser-utils](https://flows.nodered.org/node/node-red-contrib-browser-utils).
+2. Download [sample qna.tsv](https://raw.githubusercontent.com/jesus-seijas-sp/nlpjs-examples/master/03.qna/01.filecorpus/qna.tsv) locally.
+3. Import [qna_basic](https://github.com/okhiroyuki/node-red-contrib-nlp/tree/master/examples).
+4. Deploy.
+5. Execute fileinject node.
+6. Select qna.tsv.

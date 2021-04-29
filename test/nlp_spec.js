@@ -29,17 +29,28 @@ describe("nlp Node", () => {
   });
 
   it("should be loaded (nlp train)", (done) => {
-    const flow = [{ id: "n1", type: "nlp train", lang: "en", name: "test" }];
+    const flow = [{ id: "n1", type: "nlp train", lang: "jp", name: "test" }];
     helper.load(node, flow, () => {
       const n1 = helper.getNode("n1");
       n1.should.have.property("name", "test");
+      n1.should.have.property("lang", "jp");
+      done();
+    });
+  });
+
+  it("should be loaded (nlp train)", (done) => {
+    const flow = [{ id: "n1", type: "nlp train", name: "test" }];
+    helper.load(node, flow, () => {
+      const n1 = helper.getNode("n1");
+      n1.should.have.property("name", "test");
+      n1.should.have.property("lang", "en");
       done();
     });
   });
 
   it("should make payload", function (done) {
     const flow = [
-      { id: "n1", type: "nlp train", name: "test", wires:[["n2"]] },
+      { id: "n1", type: "nlp train", name: "test", lang: "en", wires:[["n2"]] },
       { id: "n2", type: "nlp", name: "test", utterance: "who are you", lang: "en", wires:[["n3"]] },
       { id: "n3", type: "helper" }
     ];
@@ -50,9 +61,9 @@ describe("nlp Node", () => {
         should.equal(msg.payload.utterance, "who are you");
         done();
       })
-      let corpus = fs.readFileSync(__dirname + "/corpus-en.json");
+      let corpus = fs.readFileSync(__dirname + "/qna.tsv");
       n1.receive({
-        payload: JSON.parse(corpus)
+        payload: corpus
       });
     });
   });
@@ -86,16 +97,16 @@ describe("nlp Node", () => {
         should.equal(msg.lastArg, "nlp.warn.noUtterance");
         done();
       });
-      let corpus = fs.readFileSync(__dirname + "/corpus-en.json");
+      let corpus = fs.readFileSync(__dirname + "/qna.tsv");
       n1.receive({
-        corpus: JSON.parse(corpus)
+        corpus: corpus
       });
     });
   });
 
   it("no corpus", function (done) {
     const flow = [
-      { id: "n1", type: "nlp train", name: "test", wires:[["n2"]] },
+      { id: "n1", type: "nlp train", name: "test", lang: "en", wires:[["n2"]] },
       { id: "n2", type: "helper" }
     ];
     helper.load(node, flow, () => {

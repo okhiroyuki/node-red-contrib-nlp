@@ -5,20 +5,20 @@ module.exports = function(RED) {
     const path = require('path');
     const { dockStart } = require('@nlpjs/basic');
 
-    function getJsonFile(data){
+    function getFile(data){
         let tmpDir = tmp.dirSync({
             unsafeCleanup: true
         });
-        let filepath = tmpDir.name + "/" + path.basename(tmpDir.name) + ".json";
-        fs.writeFileSync(filepath, JSON.stringify(data));
+        let filepath = tmpDir.name + "/" + path.basename(tmpDir.name) + ".tsv";
+        fs.writeFileSync(filepath, data);
         return filepath;
     }
 
     const runTrain = async (node, msg) => {
         try{
-            const dock = await dockStart({ use: ['Basic']});
+            const dock = await dockStart({ use: ['Basic', 'Qna'] });
             const nlp = dock.get('nlp');
-            await nlp.addCorpus(getJsonFile(msg.payload));
+            await nlp.addCorpus({ filename: getFile(msg.payload), importer: 'qna', locale: node.lang});
             await nlp.train();
             node.send(msg);
         }catch(err){
@@ -40,7 +40,7 @@ module.exports = function(RED) {
 
     const run = async (node, msg) => {
         try{
-            const dock = await dockStart({ use: ['Basic']});
+            const dock = await dockStart({ use: ['Basic', 'Qna'] });
             const nlp = dock.get('nlp');
             const response = await nlp.process(node.lang, getUtterance(node,msg));
             msg.payload = response;
@@ -54,8 +54,8 @@ module.exports = function(RED) {
         return value && typeof value === "string" && value.length > 0;
     }
 
-    function hasObject(value){
-        return value && typeof value === "object";
+    function hasPayload(value){
+        return value && (typeof value === "string" || typeof value === "object");
     }
 
     function NlpBasicNode(n) {
@@ -76,10 +76,14 @@ module.exports = function(RED) {
 
     function NlpTrainNode(n) {
         RED.nodes.createNode(this,n);
+        this.lang = n.lang;
+        if(!this.lang){
+            this.lang = "en";
+        }
         let node = this;
 
         node.on("input", function(msg) {
-            if(hasObject(msg.payload)){
+            if(hasPayload(msg.payload)){
                 runTrain(node, msg);
             }else{
                 node.warn(RED._("nlp.warn.noCorpus"));
