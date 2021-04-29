@@ -16,7 +16,7 @@ module.exports = function(RED) {
 
     const runTrain = async (node, msg) => {
         try{
-            const dock = await dockStart({ use: ['Basic', 'Qna'] });
+            const dock = await dockStart({ use: ['Basic', 'Qna' , "LangJa"] });
             const nlp = dock.get('nlp');
             await nlp.addCorpus({ filename: getFile(msg.payload), importer: 'qna', locale: node.lang});
             await nlp.train();
@@ -40,7 +40,7 @@ module.exports = function(RED) {
 
     const run = async (node, msg) => {
         try{
-            const dock = await dockStart({ use: ['Basic', 'Qna'] });
+            const dock = await dockStart({ use: ['Basic', 'Qna', "LangJa"] });
             const nlp = dock.get('nlp');
             const response = await nlp.process(node.lang, getUtterance(node,msg));
             msg.payload = response;
