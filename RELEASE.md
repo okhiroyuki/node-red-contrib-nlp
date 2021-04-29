@@ -1,3 +1,7 @@
+# Release 3.0.1
+
+- Japanese language support
+
 # Release 3.0.0
 
 ## Breaking Changes
