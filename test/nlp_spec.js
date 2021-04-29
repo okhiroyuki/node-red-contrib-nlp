@@ -29,11 +29,11 @@ describe("nlp Node", () => {
   });
 
   it("should be loaded (nlp train)", (done) => {
-    const flow = [{ id: "n1", type: "nlp train", lang: "jp", name: "test" }];
+    const flow = [{ id: "n1", type: "nlp train", lang: "ja", name: "test" }];
     helper.load(node, flow, () => {
       const n1 = helper.getNode("n1");
       n1.should.have.property("name", "test");
-      n1.should.have.property("lang", "jp");
+      n1.should.have.property("lang", "ja");
       done();
     });
   });
@@ -48,22 +48,30 @@ describe("nlp Node", () => {
     });
   });
 
-  it("should make payload", function (done) {
-    const flow = [
-      { id: "n1", type: "nlp train", name: "test", lang: "en", wires:[["n2"]] },
-      { id: "n2", type: "nlp", name: "test", utterance: "who are you", lang: "en", wires:[["n3"]] },
-      { id: "n3", type: "helper" }
+  describe("should make payload", () => {
+    tests = [
+      {"lang": "en", file: "qna_en.tsv", utterance: "say about you", answer: "I'm a virtual agent"},
+      {"lang": "ja", file: "qna_ja.tsv", utterance: "はじめまして、オラ孫悟空", answer: "それはあまりにも、素敵な会議あなたです"},
     ];
-    helper.load(node, flow, () => {
-      const n3 = helper.getNode("n3");
-      const n1 = helper.getNode("n1");
-      n3.on("input", (msg) => {
-        should.equal(msg.payload.utterance, "who are you");
-        done();
-      })
-      let corpus = fs.readFileSync(__dirname + "/qna.tsv");
-      n1.receive({
-        payload: corpus
+    tests.forEach((test) =>{
+      it("lang: " + test.lang, function (done) {
+        const flow = [
+          { id: "n1", type: "nlp train", name: "test", lang: test.lang, wires:[["n2"]] },
+          { id: "n2", type: "nlp", name: "test", utterance: test.utterance, lang: test.lang, wires:[["n3"]] },
+          { id: "n3", type: "helper" }
+        ];
+        helper.load(node, flow, () => {
+          const n3 = helper.getNode("n3");
+          const n1 = helper.getNode("n1");
+          n3.on("input", (msg) => {
+            should.equal(msg.payload.answer, test.answer);
+            done();
+          })
+          let corpus = fs.readFileSync(__dirname + "/" + test.file);
+          n1.receive({
+            payload: corpus
+          });
+        });
       });
     });
   });
@@ -97,7 +105,7 @@ describe("nlp Node", () => {
         should.equal(msg.lastArg, "nlp.warn.noUtterance");
         done();
       });
-      let corpus = fs.readFileSync(__dirname + "/qna.tsv");
+      let corpus = fs.readFileSync(__dirname + "/qna_en.tsv");
       n1.receive({
         corpus: corpus
       });
